@@ -28,6 +28,10 @@ This software is part of the following publication:
  DEbateNet-mig15: Tracing the 2015 Immigration Debate in Germany Over Time. 
  In: Proceedings of LREC. , Marseille, France (2020). 
 
+## License
+
+See [here](https://clarin09.ims.uni-stuttgart.de/debatenet/) for further information regarding the licensing. 
+
 
 ## Installation
 

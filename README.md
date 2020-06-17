@@ -19,6 +19,11 @@ This software is part of the following publication:
 > Germany Over Time. In: Proceedings of LREC. , Marseille, France
 > (2020).
 
+## License
+
+See [here](https://clarin09.ims.uni-stuttgart.de/debatenet/) for further
+information regarding the licensing.
+
 ## Installation
 
 You can find the LREC release version of mardyr2
