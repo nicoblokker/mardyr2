@@ -1,0 +1,38 @@
+Package: mardyr2
+Type: Package
+Title: An interface to the MARDY-demo-application
+Version: 0.1.1
+Authors@R: 
+    as.person(c(
+    "Nico Blokker <blokker@uni-bremen.de> [aut, cre]",
+    "André Blessing <andre.blessing@ims.uni-stuttgart.de> [aut]",
+    "Erenay Dayanik <erenay.dayanik@ims.uni-stuttgart.de> [aut]",
+    "Sebastian Haunss  <sebastian.haunss@uni-bremen.de> [aut]",
+    "Jonas Kuhn <jonas.kuhn@ims.uni-stuttgart.de> [aut]",
+    "Gabriella Lapesa <gabriella.lapesa@ims.uni-stuttgart.de> [aut]",
+    "Sebastian Padó <pado@ims.uni-stuttgart.de> [aut]"
+    ))
+Description: MardyR enables the user to select, visualize and download
+      data from the MARDY-research project. Additional functionalities include access to
+      training models via an API, the 'DEbateNet-mig15'-data set, and utility functions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports:
+    dplyr,
+    igraph,
+    visNetwork,
+    magrittr,
+    tidyr,
+    shiny,
+    DT, 
+    jsonlite,
+    shinydashboard,
+    tibble,
+    httr,
+    purrr,
+    lubridate,
+    utils,
+    shinyjs
+Depends: R (>= 2.10)
