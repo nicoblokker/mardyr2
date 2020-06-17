@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mardyR2
+# mardyr2
 
 <!-- badges: start -->
 
@@ -9,7 +9,7 @@
 
 mardyr2 enables the user to select, visualize and download data from the
 MARDY-research project. Additional functionalities include access to
-training models via an API, the ‘DEbateNet-mig15’-data set, and utility
+training models via an API, the `DEbateNet-mig15`-data set, and utility
 functions.
 
 This software is part of the following publication:
@@ -21,13 +21,12 @@ This software is part of the following publication:
 
 ## Installation
 
-You can find the LREC release version of mardyr2 here
-[DEbateNet](https://clarin09.ims.uni-stuttgart.de/debatenet/). To
-install the development version please
-run:
+You can find the LREC release version of mardyr2
+[here](https://clarin09.ims.uni-stuttgart.de/debatenet/). To install the
+development version please run:
 
 ``` r
-devtools::install_gitlab(https://clarin06.ims.uni-stuttgart.de/nico/mardyr2)
+devtools::install_gitlab(https://github.com/nicoblokker/mardyr_dev)
 ```
 
 ## Examples
@@ -52,7 +51,7 @@ Or send a test sentence to the API:
 
 ``` r
 library(mardyr2)
-get_predictions("Angela Merkel lehnt eine Obergrenze ab.", verbose = F, output = "word")
+get_predictions("Angela Merkel lehnt eine Obergrenze ab.", output = "word")
 #> # A tibble: 7 x 4
 #>   sentence    id prediction word      
 #>      <int> <int> <chr>      <chr>     
