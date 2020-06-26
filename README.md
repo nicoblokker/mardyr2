@@ -53,7 +53,7 @@ library(mardyr2)
 get_data(source = "example")
 ```
 
-<img src="./man/figures/mardyr2_network.jpg" width="100%" />
+<img src="man/figures/mardyr2_network.jpg" width="100%" />
 
 Or send a test sentence to the API:
 
