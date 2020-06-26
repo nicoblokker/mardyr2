@@ -19,9 +19,17 @@ get_data <- function(source = "online"){
                     data <- jsonlite::fromJSON("https://clarin09.ims.uni-stuttgart.de/debatenet/DebateNet-migr15.json")$data
                     data <- data %>% tidyr::unnest_legacy(actorclusters, .drop = F) %>% dplyr::select(name, claimvalues, cpos, cdate, quote, parties)
                     data$cdate <- lubridate::ymd(data$cdate)
+                    data$parties[sapply(1:nrow(data), function(x) length(data$parties[[x]]) != 1)] <- NA
+                    data$parties <- unlist(data$parties)
+                    data$parties <- gsub("Gr.ne", "Green", data$parties)
+                    data$parties[data$parties == "Linke"] <- "Left"
           } else if(source == "example"){
                     data <- mardydemo
                     data$cdate <- lubridate::ymd(data$cdate)
+                    data$parties[sapply(1:nrow(data), function(x) length(data$parties[[x]]) != 1)] <- NA
+                    data$parties <- unlist(data$parties)
+                    data$parties <- gsub("Gr.ne", "Green", data$parties)
+                    data$parties[data$parties == "Linke"] <- "Left"
           }
           ui <- dashboardPage(
                     dashboardHeader(title = "Project Mardy",
@@ -61,9 +69,9 @@ get_data <- function(source = "online"){
                                                 fluidRow(valueBoxOutput("meandegree"),
                                                          valueBoxOutput("nodes"),
                                                          valueBoxOutput("edges"),
-                                                         box(visNetwork::visNetworkOutput("network_plot", height = 500), width = 12, title = "discourse network", solidHeader = F, status = "info"),
+                                                         box(visNetwork::visNetworkOutput("network_plot", height = "500px", width = "auto"), width = 12, solidHeader = F, status = "info"),
                                                          box(sliderInput("degree", "Degree", value = 0, min = 0, max = 100), width = 3),
-                                                         box(selectInput("weight", "Weight",choices = c("all",-1, 1, 2)), width = 3),
+                                                         box(selectInput("weight", "Weight", choices = c("all" = "all", "neg" = -1, "pos" = 1, "conf" = 2)), width = 3),
                                                          box(selectInput("projection", "Projection", choices = c("affiliation", "actor", "concept")), width = 3),
                                                          box(selectInput("multi", "show multiplex",choices = c(FALSE,TRUE)), width = 3)
                                                 )),
@@ -113,7 +121,7 @@ get_data <- function(source = "online"){
                     })
                     output$table <- DT::renderDataTable(DT::datatable(tt$t,
                                                                       filter = "bot",
-                                                                     #editable = list(target = "cell", disable = list(columns = c(1:6))),
+                                                                      #editable = list(target = "cell", disable = list(columns = c(1:6))),
                                                                       extensions = "Buttons",
                                                                       options = list(dom = "Blrtip",
                                                                                      buttons = c("csv", "pdf"),
@@ -124,11 +132,20 @@ get_data <- function(source = "online"){
                                                                                      search = list(regex = T, caseInsensitive = TRUE))),
                                                         server = T)
                     observeEvent(input$assign, {
-                              position <- 1
-                              showModal(modalDialog(
-                                        title = "Task successful",
-                                        "Data set exported to .globalEnv", fade = T))
-                              assign("mardy_data_set", tt$t[input[["table_rows_all"]], ], envir = as.environment(position))
+                              if(input$tabs == "data"){
+                                        position <- 1
+                                        showModal(modalDialog(
+                                                  title = "Task successful",
+                                                  "Data set exported to .globalEnv", fade = T))
+                                        assign("mardy_data_set", tt$t[input[["table_rows_all"]], ], envir = as.environment(position))
+                              }
+                              if(input$tabs == "network"){
+                                        position <- 1
+                                        showModal(modalDialog(
+                                                  title = "Task successful",
+                                                  "Network exported to .globalEnv", fade = T))
+                                        assign("mardy_network", gg$g, envir = as.environment(position))
+                              }
                     })
                     observe({
                               if(input$tabs == "network"){
@@ -139,7 +156,7 @@ get_data <- function(source = "online"){
                                         data <- tt$t[input[["table_rows_all"]], ]
                                         if(input$projection == "affiliation"){
                                                   g <- graph_from_data_frame(data[,c("name", "claimvalues", "cpos")], directed = F)
-                                                  if(input$weight != 0){
+                                                  if(input$degree != 0){
                                                             g <- induced_subgraph(g, degree(g) >= input$degree)
                                                   }
                                                   if(input$weight == "all"){
@@ -148,13 +165,17 @@ get_data <- function(source = "online"){
                                                             g <- subgraph.edges(g, which(E(g)$cpos == input$weight))
                                                   }
                                                   V(g)$type <- V(g)$name %in% data[,1]
-                                                  V(g)$color <- ifelse(V(g)$type, "skyblue", "salmon")
+                                                  if("parties" %in% colnames(data) & vcount(g) > 0){
+                                                            V(g)$color <- coloring(g, data = data)
+                                                  } else {
+                                                            V(g)$color <- ifelse(V(g)$type, "skyblue", "salmon")
+                                                  }
                                                   V(g)$shape <- ifelse(V(g)$type, "dot", "square")
                                                   E(g)$color <- ifelse(E(g)$cpos < 0, "red", "blue")
                                                   gg$g <- g
                                         } else if(input$projection == "actor" & input$unnest == "unnest" & length(unique(data$name)) > 1) {
                                                   g <- project(data[,c("name", "claimvalues", "cpos")])
-                                                  if(input$weight != 0){
+                                                  if(input$degree != 0){
                                                             g <- induced_subgraph(g, degree(g) >= input$degree)
                                                   }
                                                   if(input$weight == "all"){
@@ -162,11 +183,14 @@ get_data <- function(source = "online"){
                                                   } else {
                                                             g <- subgraph.edges(g, which(E(g)$cpos == input$weight))
                                                   }
+                                                  if("parties" %in% colnames(data) & vcount(g) > 0){
+                                                            V(g)$color <- coloring(g, data = data)
+                                                  }
                                                   gg$g <- g
 
                                         } else if(input$projection == "concept" & input$unnest == "unnest"  & length(unique(data$claimvalues)) > 1){
                                                   g <- project(data[,c("claimvalues", "name", "cpos")])
-                                                  if(input$weight != 0){
+                                                  if(input$degree != 0){
                                                             g <- induced_subgraph(g, degree(g) >= input$degree)
                                                   }
                                                   if(input$weight == "all"){

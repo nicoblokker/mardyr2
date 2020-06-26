@@ -22,7 +22,7 @@ mardyr2 enables the user to select, visualize and download
 data from the MARDY-research project. Additional functionalities include access to
 training models via an API, the `DEbateNet-mig15`-data set, and utility functions.
 
-This software is part of the following publication:
+This software is part of the following publication ([PDF](https://www.aclweb.org/anthology/2020.lrec-1.115/)):
 
 >  Lapesa, G., Blessing, A., Blokker, N., Dayanik, E., Haunss, S., Kuhn, J., Pado, S.: 
  DEbateNet-mig15: Tracing the 2015 Immigration Debate in Germany Over Time. 
@@ -52,16 +52,20 @@ data("DEbateNet_mig15")
 dim(DEbateNet_mig15)
 ```
 
-Start `shinyApp` to visualize the `DEbateNet-mig15` data set
+Start `shinydashboard` to visualize the `DEbateNet-mig15` data set
 
 ```{r example, eval=F}
 library(mardyr2)
 get_data(source = "example")
 ```
 
+```{r example2, eval=T, echo=F, outwidth = "100px"}
+knitr::include_graphics("./man/figures/mardyr2_network.jpg")
+```
+
 Or send a test sentence to the API:
 
-```{r example2, eval=T, message=F}
+```{r example3, eval=T, message=F}
 library(mardyr2)
 get_predictions("Angela Merkel lehnt eine Obergrenze ab.", output = "word")
 ```

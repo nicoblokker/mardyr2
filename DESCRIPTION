@@ -1,7 +1,7 @@
 Package: mardyr2
 Type: Package
 Title: An interface to the MARDY-demo-application
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     as.person(c(
     "Nico Blokker <blokker@uni-bremen.de> [aut, cre]",
