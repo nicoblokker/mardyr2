@@ -60,7 +60,7 @@ get_data(source = "example")
 ```
 
 ```{r example2, eval=T, echo=F, outwidth = "100px"}
-knitr::include_graphics("man/figures/mardyr2_network.jpg")
+knitr::include_graphics("./man/figures/mardyr2_network.JPG")
 ```
 
 Or send a test sentence to the API:
