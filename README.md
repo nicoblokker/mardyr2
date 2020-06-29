@@ -32,7 +32,7 @@ You can find the LREC release version of mardyr2
 development version please run:
 
 ``` r
-devtools::install_github("nicoblokker/mardyr_dev")
+devtools::install_github("nicoblokker/mardyr2")
 ```
 
 ## Examples
