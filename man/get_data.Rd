@@ -4,10 +4,14 @@
 \alias{get_data}
 \title{get_data}
 \usage{
-get_data(source = "online")
+get_data(source = "LRE", start = "2015-09-01", end = "2015-09-30")
 }
 \arguments{
-\item{source}{either "online" (default) to download data or "example" to access inbuild data set}
+\item{source}{either "LRE" (default) to access inbuilt data sets (alternatively "lrec" for older data set)}
+
+\item{start}{startdate as character string (e.g., "2015-01-01", defaults to "2015-09-01"). Has to be in the boundaries of the year 2015.}
+
+\item{end}{enddate as character string (e.g., "2015-12-31", defaults to "2015-09-30"). Has to be in the boundaries of the year 2015.}
 }
 \value{
 (optionally) returns selected data set as .csv or `dataframe`
@@ -17,6 +21,6 @@ starts shiny app with GUI for data selection and visualization
 }
 \examples{
 \dontrun{
-get_data(source = "example")
+get_data(source = "LRE")
 }
 }

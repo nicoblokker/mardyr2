@@ -28,6 +28,7 @@ coloring <- function(g, data = data){
                             "Green" = "forestgreen",
                             "Left" = "darkorchid",
                             "FDP" = "yellow",
+                            "NPD" = "orange",
                             "without" = "slategrey",
                             "claim" = "grey")
           V(g)$color <- unname(party_colors[V(g)$party])
