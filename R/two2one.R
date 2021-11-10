@@ -22,7 +22,7 @@ two2one <- function(df, ret = "graph", iso = TRUE){
                         matrix_trans <- tcrossprod(matrix1)
                         comment(matrix_trans) <- "pos"
                 }
-                if(is.null(matrix2) & sum(matrix1) < 0){
+                if(is.null(matrix2) & sum(matrix1) <= 0){
                         matrix_trans <- tcrossprod(matrix1)
                         comment(matrix_trans) <- "neg"
                 }
