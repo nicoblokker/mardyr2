@@ -158,15 +158,15 @@ get_data <- function(source = "LRE", start = "2015-09-01", end = "2015-09-30"){
                               tt$t <- data
                     })
                     output$rows <- renderValueBox({
-                              valueBox(paste0(nrow(tt$t[input[["table_rows_all"]],])), "observations", icon = icon("list"),
+                              valueBox(paste0(nrow(tt$t[input$table_rows_all,])), "observations", icon = icon("list"),
                                        color = "purple")
                     })
                     output$actors <- renderValueBox({
-                              valueBox(paste0(length(unique(tt$t[input[["table_rows_all"]], "name"]))), "actors", icon = icon("list"),
+                              valueBox(paste0(length(unique(tt$t[input$table_rows_all, "name"]))), "actors", icon = icon("list"),
                                        color = "yellow")
                     })
                     output$claims <- renderValueBox({
-                              valueBox(paste0(length(unique(tt$t[input[["table_rows_all"]], "claimvalues"]))), "claims", icon = icon("list"),
+                              valueBox(paste0(length(unique(tt$t[input$table_rows_all, "claimvalues"]))), "claims", icon = icon("list"),
                                        color = "green")
                     })
                     output$table <- DT::renderDataTable(DT::datatable(tt$t,
@@ -186,7 +186,7 @@ get_data <- function(source = "LRE", start = "2015-09-01", end = "2015-09-30"){
                                         showModal(modalDialog(
                                                   title = "Task successful",
                                                   "Data set exported to .globalEnv", fade = T))
-                                        assign("mardy_data_set", tt$t[input[["table_rows_all"]], ], envir = as.environment(position))
+                                        assign("mardy_data_set", tt$t[input$table_rows_all, ], envir = as.environment(position))
                               }
                               if(input$tabs == "network"){
                                         position <- 1
@@ -205,7 +205,7 @@ get_data <- function(source = "LRE", start = "2015-09-01", end = "2015-09-30"){
                                         shinyjs::enable("degree")
                                         shinyjs::disable("legacy")
                                         req(tt$t)
-                                        data <- tt$t[input[["table_rows_all"]], ]
+                                        data <- tt$t[input$table_rows_all, ]
                                         if(input$projection == "affiliation"){
                                                   g <- graph_from_data_frame(data[,c("name", "claimvalues", "cpos")], directed = F)
                                                   if(input$degree != 0){
