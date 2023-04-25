@@ -12,13 +12,15 @@ MARDY-research project. Additional functionalities include access to
 training models via an API, the `DEbateNet-mig15`-data set, and utility
 functions.
 
-This software is part of the following publication
-([PDF](https://www.aclweb.org/anthology/2020.lrec-1.115/)):
+This software is part of the following publications:
 
-> Lapesa, G., Blessing, A., Blokker, N., Dayanik, E., Haunss, S., Kuhn,
-> J., Pado, S.: DEbateNet-mig15: Tracing the 2015 Immigration Debate in
-> Germany Over Time. In: Proceedings of LREC. , Marseille, France
-> (2020).
+> Lapesa, G., Blessing, A., Blokker, N., Dayanik, E., Haunss, S., Kuhn, J., & Padó, S. (2020).
+> DEbateNet-mig15: Tracing the 2015 immigration debate in Germany over time.
+> Proceedings of LREC, 919–927. https://www.aclweb.org/anthology/2020.lrec-1.115
+
+> Blokker, N., Blessing, A., Dayanik, E., Kuhn, J., Padó, S., & Lapesa, G. (2023).
+> Between welcome culture and border fence. A dataset on the European refugee crisis in German newspaper reports.
+> Language Resources and Evaluation, 121 - 153. https://link.springer.com/article/10.1007/s10579-023-09641-8
 
 ## License
 
@@ -50,12 +52,12 @@ Start `shinydashboard` to visualize the `DEbateNet-mig15` data set
 
 ``` r
 library(mardyr2)
-get_data(source = "example")
+get_data(source = "LRE")
 ```
 
 <img src="./man/figures/mardyr2_network.JPG" width="100%" />
 
-Or send a test sentence to the API:
+Or send a test sentence to the API [**deprecated**]:
 
 ``` r
 library(mardyr2)

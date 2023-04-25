@@ -1,3 +1,3 @@
 .onAttach <- function(libname, pkgname) {
-          packageStartupMessage("Please cite as: \n Lapesa, G., Blessing, A., Blokker, N., Dayanik, E., Haunss, S., Kuhn, J., Pado, S.: \n DEbateNet-mig15: Tracing the 2015 Immigration Debate in Germany Over Time. \n In: Proceedings of LREC. , Marseille, France (2020). \n")
+          packageStartupMessage("Please cite as: \n Lapesa, G., Blessing, A., Blokker, N., Dayanik, E., Haunss, S., Kuhn, J., & Pado, S. (2020). \n DEbateNet-mig15: Tracing the 2015 Immigration Debate in Germany Over Time. \n Proceedings of LREC, 919-927. https://www.aclweb.org/anthology/2020.lrec-1.115 \n\n Blokker, N., Blessing, A., Dayanik, E., Kuhn, J., Pado, S., & Lapesa, G. (2023). \n Between welcome culture and border fence. A dataset on the European refugee crisis in German newspaper reports. \n Language Resources and Evaluation, 121-153. https://doi.org/10.1007/s10579-023-09641-8")
 }

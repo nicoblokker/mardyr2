@@ -10,10 +10,10 @@
 #' text <- "Seehofer fordert eine Obergrenze. Merkel lehnt eine Obergrenze ab."
 #' df <- get_predictions(text = text, output = "sentence")
 #' }
-#' @export
 #' @importFrom magrittr %>%
 
 get_predictions <- function(text, output = "word", verbose = F, sleep = 0){
+          stop("'get_predictions' is defunct")
           stopifnot(length(text) == 1)
           url <- "https://clarin09.ims.uni-stuttgart.de/claimidentifier/2"
           body <- list(text = text)
