@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/nicoblokker/mardyr_dev/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nicoblokker/mardyr_dev/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 mardyr2 enables the user to select, visualize and download data from the
